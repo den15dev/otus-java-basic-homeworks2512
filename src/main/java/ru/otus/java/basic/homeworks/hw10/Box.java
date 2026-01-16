@@ -47,6 +47,7 @@ public class Box {
 
         if (isFull()) {
             System.out.println("В коробке больше нет места.");
+            return;
         }
 
         int freeIndex = getFreeIndex();
