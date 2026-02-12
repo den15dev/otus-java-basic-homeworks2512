@@ -28,5 +28,9 @@ public class App {
         Person person1 = db.findById(4L);
         System.out.println(person1.getName() + " менеджер? " + db.isManager(person1));
         System.out.println(db.findById(6L).getName() + " сотрудник? " + db.isEmployee(6L));
+
+        int[] arr = {4, 23, 51, 21, 9, 12};
+        Sorter.bubbleSort(arr);
+        System.out.println("Отсортированный массив: " + Arrays.toString(arr));
     }
 }
