@@ -1,0 +1,2 @@
+abcdefghijklmn
+Это текст из файла "textfile_03.txt"

@@ -1,0 +1,2 @@
+aabbccdd eeffgghh
+Это текст из файла "my-file-005.txt"
