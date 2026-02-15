@@ -20,15 +20,15 @@ public class App {
         printFileContent(file);
         System.out.println();
 
-        System.out.println("Введите текст, который вы хотите записать в этот файл:");
+        System.out.println("Введите текст, который вы хотите дописать в этот файл:");
         String inputContent = scanner.nextLine();
         while (inputContent.isEmpty()) {
-            System.out.println("Файл не должен быть пустым. Введите любой текст:");
+            System.out.println("Вы ничего не ввели. Введите любой текст:");
             inputContent = scanner.nextLine();
         }
 
         writeToFile(file, inputContent);
-        System.out.println("Ваш текст успешно записан в файл " + file.getName());
+        System.out.println("Ваш текст успешно дописан в файл " + file.getName());
     }
 
 
@@ -86,7 +86,9 @@ public class App {
 
 
     private static void writeToFile(File file, String content) {
-        try (FileOutputStream out = new FileOutputStream(file.getPath())) {
+        content = "\n" + content;
+
+        try (FileOutputStream out = new FileOutputStream(file.getPath(), true)) {
             byte[] buffer = content.getBytes(StandardCharsets.UTF_8);
             out.write(buffer);
 
