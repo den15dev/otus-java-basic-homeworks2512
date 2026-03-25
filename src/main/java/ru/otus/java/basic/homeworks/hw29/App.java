@@ -13,6 +13,14 @@ public class App {
         String filePath = getFilepath(scanner);
         String searchToken = getSearchToken(scanner);
 
+        String text = getTextFromFile(filePath);
+        int numOfMatches = countMatches(text, searchToken);
+
+        System.out.println("Количество вхождений строки \"" + searchToken + "\": " + numOfMatches);
+    }
+
+
+    private static String getTextFromFile(String filePath) {
         StringBuilder contentBuilder =  new StringBuilder();
 
         try (FileReader fileReader = new FileReader(filePath, StandardCharsets.UTF_8)) {
@@ -21,20 +29,24 @@ public class App {
                 contentBuilder.append((char) nextCharCode);
             }
 
-            String text = contentBuilder.toString();
-            int count = 0;
-            int index = 0;
-
-            while ((index = text.indexOf(searchToken, index)) != -1) {
-                count++;
-                index += searchToken.length();
-            }
-
-            System.out.println("Количество вхождений строки \"" + searchToken + "\": " + count);
-
         } catch (IOException e) {
             System.out.println("Ошибка при открытии файла: "  + e.getMessage());
         }
+
+        return contentBuilder.toString();
+    }
+
+
+    private static int countMatches(String text, String token) {
+        int count = 0;
+        int index = 0;
+
+        while ((index = text.indexOf(token, index)) != -1) {
+            count++;
+            index += token.length();
+        }
+
+        return count;
     }
 
 
