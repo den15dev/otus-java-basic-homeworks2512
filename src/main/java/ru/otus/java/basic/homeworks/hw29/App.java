@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String filePath = getFilepath(scanner);
+        String filePath = getFilePath(scanner);
         String searchToken = getSearchToken(scanner);
 
         int numOfMatches = countMatchesInFile(filePath, searchToken);
@@ -43,18 +43,18 @@ public class App {
     }
 
 
-    private static String getFilepath(Scanner scanner) {
-        String prompt = "Введите путь к файлу (без расширения .txt):";
+    private static String getFilePath(Scanner scanner) {
+        String prompt = "Введите путь к файлу:";
 
         System.out.println(prompt);
-        String filePath = scanner.nextLine() + ".txt";
+        String filePath = scanner.nextLine();
 
         File file = new File(filePath);
 
         while (!file.exists()) {
             System.out.println("Такого файла не существует.");
             System.out.println(prompt);
-            filePath = scanner.nextLine() + ".txt";
+            filePath = scanner.nextLine();
 
             file = new File(filePath);
         }
