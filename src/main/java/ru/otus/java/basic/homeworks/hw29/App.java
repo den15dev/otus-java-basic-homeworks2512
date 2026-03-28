@@ -1,5 +1,6 @@
 package ru.otus.java.basic.homeworks.hw29;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,37 +14,29 @@ public class App {
         String filePath = getFilepath(scanner);
         String searchToken = getSearchToken(scanner);
 
-        String text = getTextFromFile(filePath);
-        int numOfMatches = countMatches(text, searchToken);
+        int numOfMatches = countMatchesInFile(filePath, searchToken);
 
         System.out.println("Количество вхождений строки \"" + searchToken + "\": " + numOfMatches);
     }
 
 
-    private static String getTextFromFile(String filePath) {
-        StringBuilder contentBuilder =  new StringBuilder();
+    private static int countMatchesInFile(String filePath, String searchToken) {
+        int count = 0;
 
-        try (FileReader fileReader = new FileReader(filePath, StandardCharsets.UTF_8)) {
-            int nextCharCode;
-            while((nextCharCode = fileReader.read()) != -1) {
-                contentBuilder.append((char) nextCharCode);
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
+            String nextLine;
+
+            while ((nextLine = reader.readLine()) != null) {
+                int index = 0;
+
+                while ((index = nextLine.indexOf(searchToken, index)) != -1) {
+                    count++;
+                    index += searchToken.length();
+                }
             }
 
         } catch (IOException e) {
             System.out.println("Ошибка при открытии файла: "  + e.getMessage());
-        }
-
-        return contentBuilder.toString();
-    }
-
-
-    private static int countMatches(String text, String token) {
-        int count = 0;
-        int index = 0;
-
-        while ((index = text.indexOf(token, index)) != -1) {
-            count++;
-            index += token.length();
         }
 
         return count;
